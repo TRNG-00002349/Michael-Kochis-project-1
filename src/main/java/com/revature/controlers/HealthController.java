@@ -13,5 +13,11 @@ public class HealthController {
         ctx.json(response);
     }
 
+    public void parrot(Context ctx) {
+        String parrotHears = ctx.body();
+        ctx.status(HttpStatus.OK);
+        ctx.json(parrotHears);
+    }
+
 
 }

@@ -20,6 +20,7 @@ public class JavelinUtil {
 
         //Register API endpopints
         server.get("/ping", healthController::ping);
+        server.get("/parrot", healthController::parrot);
 
 
         return server.start(8080);
