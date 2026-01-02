@@ -1,5 +1,6 @@
 package com.revature.utils;
 
+import com.revature.controlers.HealthController;
 import io.javalin.Javalin;
 
 /*
@@ -12,13 +13,13 @@ public class JavelinUtil {
         server = Javalin.create();
 
         // Set up the server stack
-        //HealthController healthController = new HealthController();
+        HealthController healthController = new HealthController();
 
         //Content Controllers with services and daos.
 
 
         //Register API endpopints
-        //server.get("/ping", healthController::ping);
+        server.get("/ping", healthController::ping);
 
 
         return server.start(8080);
