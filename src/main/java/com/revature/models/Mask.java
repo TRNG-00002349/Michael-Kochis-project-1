@@ -8,20 +8,24 @@ public class Mask {
     private String gender;
     private StatBlock statBlock;
 
+    private String imageLink;
+
     public Mask() {
     }
 
-    public Mask(String maskName, String gender, StatBlock statBlock) {
+    public Mask(String maskName, String gender, StatBlock statBlock, String imageLink) {
         this.maskName = maskName;
         this.gender = gender;
         this.statBlock = statBlock;
+        this.setImageLink(imageLink);
     }
 
-    public Mask(Long id, String maskName, String gender, StatBlock statBlock) {
+    public Mask(Long id, String maskName, String gender, StatBlock statBlock, String imageLink) {
         this.id = id;
         this.maskName = maskName;
         this.gender = gender;
         this.statBlock = statBlock;
+        this.setImageLink(imageLink);
     }
 
     public Long getId() {
@@ -56,16 +60,25 @@ public class Mask {
         this.statBlock = statBlock;
     }
 
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Mask mask)) return false;
         return Objects.equals(id, mask.id) && Objects.equals(maskName, mask.maskName)
-                && Objects.equals(gender, mask.gender) && statBlock.equals(mask.statBlock);
+                && Objects.equals(gender, mask.gender) && statBlock.equals(mask.statBlock)
+                && Objects.equals(imageLink, mask.imageLink);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, maskName, gender, statBlock);
+        return Objects.hash(id, maskName, gender, statBlock, imageLink);
     }
 }

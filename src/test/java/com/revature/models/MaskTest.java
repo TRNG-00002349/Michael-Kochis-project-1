@@ -16,24 +16,26 @@ public class MaskTest {
     }
 
     @Test
-    private void instantiateWithID() {
+    public void instantiateWithID() {
         testMask = new Mask(123L, "testMask", "neuter",
-                new StatBlock(3,3,3,3,3,3));
+                new StatBlock(3,3,3,3,3,3),
+                "");
 
         assertNotNull(testMask);
     }
 
     @Test
-    private void instantiateWithoutID() {
+    public void instantiateWithoutID() {
         testMask = new Mask("testMask", "neuter",
-                new StatBlock(3,3,3,3,3,3));
+                new StatBlock(3,3,3,3,3,3),
+                "");
 
         assertNotNull(testMask);
     }
 
     @Test
-    public void inOutMaskname() {
-        String testString = "male";
+    public void inOutMaskName() {
+        String testString = "testString";
         testMask.setMaskName(testString);
 
         assertEquals(testString, testMask.getMaskName());
@@ -45,6 +47,14 @@ public class MaskTest {
         testMask.setGender(testString);
 
         assertEquals(testString, testMask.getGender());
+    }
+
+    @Test
+    public void inOutImageLink() {
+        String testString = "testString";
+        testMask.setImageLink(testString);
+
+        assertEquals(testString, testMask.getImageLink());
     }
 
 }
