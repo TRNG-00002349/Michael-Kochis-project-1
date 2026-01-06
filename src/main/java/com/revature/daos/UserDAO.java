@@ -21,7 +21,7 @@ public class UserDAO {
     }
 
     public boolean updateUser(User updateUser) {
-        return ur.updateUser(updateUser.getId(), updateUser);
+        return updateUser(updateUser.getId(), updateUser);
     }
 
     public boolean updateUser(Long userId, User updateUser) {
