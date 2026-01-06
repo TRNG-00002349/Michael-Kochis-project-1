@@ -3,6 +3,7 @@ package com.revature.models;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UserTest {
     private User user;
@@ -15,7 +16,11 @@ public class UserTest {
 
     @Test
     public void declarewithVariables() {
-        user = new User("test", "password1", "first", "last", "test@test.com");
+
+        user = new User("test", "password1",
+                "first", "last", "test@test.com");
+
+        assertNotNull(user);
     }
 
     @Test
