@@ -25,4 +25,12 @@ public class UserService {
 
         return userDao.saveUser(user);
     }
+
+    public boolean updateUser(User updateUser) {
+        return userDao.updateUser(updateUser.getId(), updateUser);
+    }
+
+    public boolean updateUser(Long userId, User updateUser) {
+        return userDao.updateUser(userId, updateUser);
+    }
 }

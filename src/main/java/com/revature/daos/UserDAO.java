@@ -19,4 +19,12 @@ public class UserDAO {
     public User saveUser(User user) throws SQLException {
         return ur.saveUser(user);
     }
+
+    public boolean updateUser(User updateUser) {
+        return ur.updateUser(updateUser.getId(), updateUser);
+    }
+
+    public boolean updateUser(Long userId, User updateUser) {
+        return ur.updateUser(userId, updateUser);
+    }
 }

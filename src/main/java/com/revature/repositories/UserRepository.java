@@ -27,4 +27,14 @@ public class UserRepository {
 
         return user;
     }
+
+    public boolean updateUser(User updateUser) {
+        //TODO: develop this stub
+        return false;
+    }
+
+    public boolean updateUser(Long userId, User updateUser) {
+        //TOD: develop this stub
+        return false;
+    }
 }
