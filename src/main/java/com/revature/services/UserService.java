@@ -1,8 +1,10 @@
 package com.revature.services;
 
 import com.revature.daos.UserDAO;
+import com.revature.dtos.RegisterDTO;
 import com.revature.exceptions.UsernameValidationException;
 import com.revature.models.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
 
@@ -15,6 +17,21 @@ public class UserService {
 
     public UserService(UserDAO userDao) {
         this.userDao = userDao;
+    }
+
+    public boolean encryptUserPassword(User user) {
+        String salt = BCrypt.gensalt(12);
+
+        // Hash the password
+        String hashed = BCrypt.hashpw(user.getPassword(), salt);
+        user.setPassword(hashed);
+        try {
+            userDao.saveUser(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     public User saveUser(User user) throws UsernameValidationException, SQLException {

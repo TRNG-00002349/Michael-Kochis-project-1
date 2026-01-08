@@ -10,7 +10,7 @@ public class UserRepository {
 
     public User saveUser(User user) throws SQLException {
         conn = DatabaseUtil.getConnection();
-        String sql = "INSERT INTO p1_users (username, email, password, first_name, last_name) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO p1_user (username, email, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, user.getUsername());
