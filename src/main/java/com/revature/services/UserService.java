@@ -20,6 +20,10 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    public boolean deleteUser(Long target) {
+        return userDao.deleteUser(target);
+    }
+
     public boolean encryptUserPassword(User user) {
         String salt = BCrypt.gensalt(12);
 

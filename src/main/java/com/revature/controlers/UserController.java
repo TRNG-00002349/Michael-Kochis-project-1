@@ -25,6 +25,18 @@ public class UserController {
         this.us = new UserService(userDAO);
     }
 
+    public void deleteUser(Context context) {
+        Long killMe = context.pathParamAsClass("id", Long.class).get();
+
+        if (us.deleteUser(killMe)) {
+            context.status(HttpStatus.OK)
+                    .result("User is not in database");
+        } else {
+            context.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .result("Something went wrong.");
+        }
+    }
+
     public void updateUser(Context ctx) {
         User updateMe = ctx.bodyAsClass(User.class);
 

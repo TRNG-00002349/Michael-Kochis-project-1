@@ -8,6 +8,22 @@ import java.sql.*;
 public class UserRepository {
     public Connection conn;
 
+    public boolean deleteUser(Long target) {
+        conn = DatabaseUtil.getConnection();
+        String sql = "DELETE FROM p1_user WHERE id = ?";
+
+        try {
+            PreparedStatement prst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            prst.setLong(1, target);
+            prst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     public User saveUser(User user) throws SQLException {
         conn = DatabaseUtil.getConnection();
         String sql = "INSERT INTO p1_user (username, email, password, firstName, lastName) VALUES (?, ?, ?, ?, ?)";

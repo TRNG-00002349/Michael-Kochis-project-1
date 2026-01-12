@@ -20,6 +20,10 @@ public class UserDAO {
         return ur.saveUser(user);
     }
 
+    public boolean deleteUser(Long target) {
+        return ur.deleteUser(target);
+    }
+
     public boolean updateUser(User updateUser) {
         return ur.updateUser(updateUser);
     }
