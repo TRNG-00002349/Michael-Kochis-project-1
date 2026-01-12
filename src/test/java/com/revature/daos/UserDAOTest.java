@@ -38,18 +38,9 @@ public class UserDAOTest {
 
     @Test
     public void updateUserPlain() {
-        when(userRepository.updateUser(123L, mockUser)).thenReturn(true);
+        when(userRepository.updateUser(mockUser)).thenReturn(true);
 
         assertEquals(true, userDAO.updateUser(mockUser));
     }
-
-    @Test
-    public void updateUserFull() {
-        when(userRepository.updateUser(123L, mockUser)).thenReturn(true);
-
-        assertEquals(true, userDAO.updateUser(mockUser.getId(), mockUser));
-    }
-
-
 
 }

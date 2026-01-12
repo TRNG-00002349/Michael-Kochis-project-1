@@ -29,13 +29,34 @@ public class UserRepository {
     }
 
     public boolean updateUser(User updateUser) {
-        //TODO: develop this stub
-        return false;
-    }
+        conn = DatabaseUtil.getConnection();
 
-    public boolean updateUser(Long userId, User updateUser) {
-        //TOD: develop this stub
-        return false;
+        String sql = "UPDATE p1_user \n" +
+                "SET username = ?, " +
+                "password = ?," +
+                "firstname = ?, " +
+                "lastname = ?, " +
+                "email = ? \n" +
+                "WHERE id = ?;";
+
+        try {
+            PreparedStatement prst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            prst.setString(1, updateUser.getUsername());
+            prst.setString(2, updateUser.getPassword());
+            prst.setString(3, updateUser.getFirstName());
+            prst.setString(4, updateUser.getLastName());
+            prst.setString(5, updateUser.getEmail());
+            prst.setLong(6, updateUser.getId());
+
+            prst.executeUpdate();
+        } catch (SQLException e) {
+            //TODO: log this instead
+            e.printStackTrace();
+
+            return false;
+        }
+
+        return true;
     }
 
     public User findUserByUsername(String username) {

@@ -26,11 +26,6 @@ public class UserService {
         // Hash the password
         String hashed = BCrypt.hashpw(user.getPassword(), salt);
         user.setPassword(hashed);
-        try {
-            userDao.saveUser(user);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return true;
     }
@@ -45,11 +40,9 @@ public class UserService {
     }
 
     public boolean updateUser(User updateUser) {
-        return userDao.updateUser(updateUser.getId(), updateUser);
-    }
+        encryptUserPassword(updateUser);
 
-    public boolean updateUser(Long userId, User updateUser) {
-        return userDao.updateUser(userId, updateUser);
+        return userDao.updateUser(updateUser);
     }
 
     public User loginUser(LogonDTO logonInfo) {

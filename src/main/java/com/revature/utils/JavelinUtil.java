@@ -27,6 +27,7 @@ public class JavelinUtil {
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);
         server.post("/api/v1/register", userController::userRegister);
+        server.put("/api/v1/user", userController::updateUser);
         server.get("/api/v1/secure", healthController::secure);
 
 

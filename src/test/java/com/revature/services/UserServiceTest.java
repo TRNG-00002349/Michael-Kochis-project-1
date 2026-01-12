@@ -85,10 +85,10 @@ public class UserServiceTest {
         String newLastName = "User2";
         User updateUser = new User(userId, newUserName, newPassword, newEmail, newFirstName, newLastName);
 
-        when(mockUserDao.updateUser(userId, updateUser)).thenReturn(true);
+        when(mockUserDao.updateUser(updateUser)).thenReturn(true);
 
         //act
-        boolean actualResult = userService.updateUser(userId, updateUser);
+        boolean actualResult = userService.updateUser(updateUser);
 
         //assert
         assertEquals(expectedResult, actualResult);

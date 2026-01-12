@@ -22,6 +22,15 @@ public class User {
         this.email = email;
     }
 
+    public User(User otherUser) {
+        this.setId(otherUser.getId());
+        this.setUsername(otherUser.getUsername());
+        this.setPassword(otherUser.getPassword());
+        this.setFirstName(otherUser.getFirstName());
+        this.setLastName(otherUser.getLastName());
+        this.setEmail(otherUser.getEmail());
+    }
+
     public Long getId() {
         return id;
     }
