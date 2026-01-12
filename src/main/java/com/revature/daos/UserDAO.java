@@ -24,6 +24,10 @@ public class UserDAO {
         return ur.deleteUser(target);
     }
 
+    public User findUserByID(Long target) {
+        return ur.findUserById(target);
+    }
+
     public boolean updateUser(User updateUser) {
         return ur.updateUser(updateUser);
     }

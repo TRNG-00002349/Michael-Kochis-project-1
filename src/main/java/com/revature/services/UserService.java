@@ -34,6 +34,10 @@ public class UserService {
         return true;
     }
 
+    public User findUserByID(Long target) {
+        return userDao.findUserByID(target);
+    }
+
     public User saveUser(User user) throws UsernameValidationException, SQLException {
         //maybe we do some validation that results in an exception
         if(user.getUsername().length() <= 3) {

@@ -23,6 +23,7 @@ public class JavelinUtil {
         //Register API endpopints
         server.get("/ping", healthController::ping);
         server.get("/parrot", healthController::parrot);
+        server.get("/api/v1/user/{id}", userController::findUserByID);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);

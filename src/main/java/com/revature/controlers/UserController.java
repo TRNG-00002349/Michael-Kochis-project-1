@@ -37,6 +37,19 @@ public class UserController {
         }
     }
 
+    public void findUserByID(Context context) {
+        Long findMe = context.pathParamAsClass("id", Long.class).get();
+
+        User returnThis = us.findUserByID(findMe);
+        if (returnThis == null) {
+            context.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .result("Something went wrong");
+        } else {
+            context.status(HttpStatus.OK)
+                    .json(returnThis);
+        }
+    }
+
     public void updateUser(Context ctx) {
         User updateMe = ctx.bodyAsClass(User.class);
 

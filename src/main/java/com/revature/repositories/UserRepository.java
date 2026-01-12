@@ -75,7 +75,36 @@ public class UserRepository {
         return true;
     }
 
-    public User findUserByUsername(String username) {
+    public User findUserById(Long target) {
+        conn = DatabaseUtil.getConnection();
+        User returnThis = null;
+
+        String sql = "SELECT * FROM p1_user WHERE id = ?;";
+
+        try {
+            PreparedStatement prst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            prst.setLong(1, target);
+            ResultSet rs = prst.executeQuery();
+
+            if (rs.next()) {
+                returnThis = new User();
+
+                returnThis.setId(rs.getLong("id"));
+                returnThis.setUsername(rs.getString("username"));
+                returnThis.setPassword("[ENCRYPTED]");
+                returnThis.setEmail(rs.getString("email"));
+                returnThis.setFirstName(rs.getString("firstname"));
+                returnThis.setLastName(rs.getString("lastname"));
+            }
+        } catch (SQLException e) {
+            // TODO: log the error
+            e.printStackTrace();
+
+            return returnThis;
+        }
+
+        return returnThis;
+    }   public User findUserByUsername(String username) {
         conn = DatabaseUtil.getConnection();
         User returnThis = null;
 
