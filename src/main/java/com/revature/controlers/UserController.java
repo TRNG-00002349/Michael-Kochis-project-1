@@ -27,7 +27,7 @@ public class UserController {
         User loginUser = us.loginUser(logonInfo);
 
         if (loginUser == null) {
-            ctx.status(HttpStatus.FORBIDDEN)
+            ctx.status(HttpStatus.UNAUTHORIZED)
                     .result("Invalid username or password.");
         } else {
             loginUser.setPassword("[ENCRYPTED]");

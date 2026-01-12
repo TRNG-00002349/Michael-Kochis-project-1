@@ -27,6 +27,7 @@ public class JavelinUtil {
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);
         server.post("/api/v1/register", userController::userRegister);
+        server.get("/api/v1/secure", healthController::secure);
 
 
         return server.start(8080);
