@@ -8,6 +8,7 @@ import com.revature.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserService {
     private final UserDAO userDao;
@@ -32,6 +33,10 @@ public class UserService {
         user.setPassword(hashed);
 
         return true;
+    }
+
+    public List<User> findAllUsers() {
+        return userDao.findAllUSers();
     }
 
     public User findUserByID(Long target) {

@@ -5,6 +5,7 @@ import com.revature.repositories.UserRepository;
 import com.revature.utils.DatabaseUtil;
 
 import java.sql.*;
+import java.util.List;
 
 public class UserDAO {
     private static UserRepository ur;
@@ -22,6 +23,10 @@ public class UserDAO {
 
     public boolean deleteUser(Long target) {
         return ur.deleteUser(target);
+    }
+
+    public List<User> findAllUSers() {
+        return ur.findAllUsers();
     }
 
     public User findUserByID(Long target) {

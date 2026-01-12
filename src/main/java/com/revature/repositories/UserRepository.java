@@ -4,6 +4,8 @@ import com.revature.models.User;
 import com.revature.utils.DatabaseUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
     public Connection conn;
@@ -75,6 +77,38 @@ public class UserRepository {
         return true;
     }
 
+    public List<User> findAllUsers() {
+        conn = DatabaseUtil.getConnection();
+        List<User> returnThis = new ArrayList<>();
+
+        String sql = "SELECT * FROM p1_user;";
+
+        try {
+            PreparedStatement prst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = prst.executeQuery();
+
+            while (rs.next()) {
+                User tempUser = new User();
+
+                tempUser.setId(rs.getLong("id"));
+                tempUser.setUsername(rs.getString("username"));
+                tempUser.setPassword("[ENCRYPTED]");
+                tempUser.setEmail(rs.getString("email"));
+                tempUser.setFirstName(rs.getString("firstname"));
+                tempUser.setLastName(rs.getString("lastname"));
+
+                returnThis.add(tempUser);
+            }
+        } catch (SQLException e) {
+            // TODO: log the error
+            e.printStackTrace();
+
+            return returnThis;
+        }
+
+        return returnThis;
+    }
+
     public User findUserById(Long target) {
         conn = DatabaseUtil.getConnection();
         User returnThis = null;
@@ -104,7 +138,9 @@ public class UserRepository {
         }
 
         return returnThis;
-    }   public User findUserByUsername(String username) {
+    }
+
+    public User findUserByUsername(String username) {
         conn = DatabaseUtil.getConnection();
         User returnThis = null;
 

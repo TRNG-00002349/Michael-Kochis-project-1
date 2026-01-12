@@ -24,6 +24,7 @@ public class JavelinUtil {
         server.get("/ping", healthController::ping);
         server.get("/parrot", healthController::parrot);
         server.get("/api/v1/user/{id}", userController::findUserByID);
+        server.get("/api/v1/user", userController::findAllUsers);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);

@@ -10,6 +10,7 @@ import io.javalin.http.HttpStatus;
 import com.revature.dtos.LogonDTO;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /*
  * This will handle all the HTTP level request.
@@ -35,6 +36,13 @@ public class UserController {
             context.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .result("Something went wrong.");
         }
+    }
+
+    public void findAllUsers(Context context) {
+        List<User> listUsers = us.findAllUsers();
+
+        context.status(HttpStatus.OK)
+                .json(listUsers);
     }
 
     public void findUserByID(Context context) {
