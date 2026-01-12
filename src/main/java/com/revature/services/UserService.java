@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.daos.UserDAO;
+import com.revature.dtos.LogonDTO;
 import com.revature.dtos.RegisterDTO;
 import com.revature.exceptions.UsernameValidationException;
 import com.revature.models.User;
@@ -49,5 +50,16 @@ public class UserService {
 
     public boolean updateUser(Long userId, User updateUser) {
         return userDao.updateUser(userId, updateUser);
+    }
+
+    public User loginUser(LogonDTO logonInfo) {
+        User returnThis = userDao.findUserByUsername(logonInfo.getUsername());
+
+        //TODO: check the password here
+        if (BCrypt.checkpw(logonInfo.getPassword(), returnThis.getPassword())) {
+            return returnThis;
+        } else {
+            return null;
+        }
     }
 }

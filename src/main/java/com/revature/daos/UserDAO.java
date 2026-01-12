@@ -27,4 +27,8 @@ public class UserDAO {
     public boolean updateUser(Long userId, User updateUser) {
         return ur.updateUser(userId, updateUser);
     }
+
+    public User findUserByUsername(String username) {
+        return ur.findUserByUsername(username);
+    }
 }

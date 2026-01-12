@@ -24,8 +24,16 @@ public class UserController {
 
     public void userLogon(Context ctx) {
         LogonDTO logonInfo = ctx.bodyAsClass(LogonDTO.class);
-        ctx.status(HttpStatus.OK);
-        ctx.json(logonInfo);
+        User loginUser = us.loginUser(logonInfo);
+
+        if (loginUser == null) {
+            ctx.status(HttpStatus.FORBIDDEN)
+                    .result("Invalid username or password.");
+        } else {
+            loginUser.setPassword("[ENCRYPTED]");
+            ctx.status(HttpStatus.OK)
+                    .json(loginUser);
+        }
     }
 
     public void userRegister(Context context) {

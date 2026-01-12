@@ -37,4 +37,35 @@ public class UserRepository {
         //TOD: develop this stub
         return false;
     }
+
+    public User findUserByUsername(String username) {
+        conn = DatabaseUtil.getConnection();
+        User returnThis = null;
+
+        String sql = "SELECT * FROM p1_user WHERE username = ?;";
+
+        try {
+            PreparedStatement prst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            prst.setString(1, username);
+            ResultSet rs = prst.executeQuery();
+
+            if (rs.next()) {
+                returnThis = new User();
+
+                returnThis.setId(rs.getLong("id"));
+                returnThis.setUsername(rs.getString("username"));
+                returnThis.setPassword(rs.getString("password"));
+                returnThis.setEmail(rs.getString("email"));
+                returnThis.setFirstName(rs.getString("firstname"));
+                returnThis.setLastName(rs.getString("lastname"));
+            }
+        } catch (SQLException e) {
+            // TODO: log the error
+            e.printStackTrace();
+
+            return returnThis;
+        }
+
+        return returnThis;
+    }
 }
