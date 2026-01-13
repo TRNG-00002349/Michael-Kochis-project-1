@@ -32,6 +32,8 @@ public class JavelinUtil {
         //follow endpoints
         server.post("api/v1/user/follow", followController::createFollow);
         server.delete("api/v1/user/follow", followController::deleteFollow);
+        server.get("/api/v1/user/follow/{target}", followController::findFollowsByFollower);
+        server.get("/api/v1/user/followed/{target}", followController::findFollowsByFollowed);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);

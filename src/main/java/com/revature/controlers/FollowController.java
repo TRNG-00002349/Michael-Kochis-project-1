@@ -5,6 +5,10 @@ import com.revature.services.FollowService;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
+import java.util.List;
+
+import java.util.List;
+
 public class FollowController {
     private final FollowService fs;
 
@@ -38,6 +42,31 @@ public class FollowController {
         } else {
             context.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .result("Something appears to have gone wrong.");
+        }
+    }
+
+    public void findFollowsByFollowed(Context context) {
+        Long target = context.pathParamAsClass("target", Long.class).get();
+        List<Follow> returnThis = fs.findFollowsByFollowed(target);
+
+        if (returnThis == null) {
+            context.status(HttpStatus.NO_CONTENT)
+                    .result("No such followers found");
+        } else {
+            context.status(HttpStatus.OK)
+                    .json(returnThis);
+        }
+    }
+    public void findFollowsByFollower(Context context) {
+        Long target = context.pathParamAsClass("target", Long.class).get();
+        List<Follow> returnThis = fs.findFollowsByFollower(target);
+
+        if (returnThis == null) {
+            context.status(HttpStatus.NO_CONTENT)
+                    .result("No such followers found");
+        } else {
+            context.status(HttpStatus.OK)
+                    .json(returnThis);
         }
     }
 }

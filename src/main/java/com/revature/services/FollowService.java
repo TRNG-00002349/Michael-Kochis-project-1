@@ -3,6 +3,8 @@ package com.revature.services;
 import com.revature.daos.FollowDao;
 import com.revature.models.Follow;
 
+import java.util.List;
+
 public class FollowService {
     private final FollowDao followDao;
 
@@ -19,6 +21,17 @@ public class FollowService {
     }
 
     public boolean deleteFollow(Long follower_id, Long followed_id) {
+        if (follower_id == followed_id) {
+            return false;
+        }
         return followDao.deleteFollow(follower_id, followed_id);
+    }
+
+    public List<Follow> findFollowsByFollower(Long target) {
+        return followDao.findFollowsByFollower(target);
+    }
+
+    public List<Follow> findFollowsByFollowed(Long target) {
+        return followDao.findFollowsByFollowed(target);
     }
 }
