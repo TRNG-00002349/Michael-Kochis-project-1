@@ -1,5 +1,6 @@
 package com.revature.utils;
 
+import com.revature.controlers.FollowController;
 import com.revature.controlers.HealthController;
 import com.revature.controlers.UserController;
 import io.javalin.Javalin;
@@ -14,8 +15,10 @@ public class JavelinUtil {
         server = Javalin.create();
 
         // Set up the server stack
+        FollowController followController = new FollowController();
         HealthController healthController = new HealthController();
         UserController userController = new UserController();
+
 
         //Content Controllers with services and daos.
 
@@ -25,6 +28,10 @@ public class JavelinUtil {
         server.get("/parrot", healthController::parrot);
         server.get("/api/v1/user/{id}", userController::findUserByID);
         server.get("/api/v1/user", userController::findAllUsers);
+
+        //follow endpoints
+        server.post("api/v1/user/follow", followController::createFollow);
+        server.delete("api/v1/user/follow", followController::deleteFollow);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);
