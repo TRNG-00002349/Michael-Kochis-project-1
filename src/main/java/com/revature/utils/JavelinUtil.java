@@ -2,6 +2,7 @@ package com.revature.utils;
 
 import com.revature.controlers.FollowController;
 import com.revature.controlers.HealthController;
+import com.revature.controlers.TeamController;
 import com.revature.controlers.UserController;
 import io.javalin.Javalin;
 
@@ -17,6 +18,7 @@ public class JavelinUtil {
         // Set up the server stack
         FollowController followController = new FollowController();
         HealthController healthController = new HealthController();
+        TeamController teamController = new TeamController();
         UserController userController = new UserController();
 
 
@@ -34,6 +36,12 @@ public class JavelinUtil {
         server.delete("api/v1/user/follow", followController::deleteFollow);
         server.get("/api/v1/user/follow/{target}", followController::findFollowsByFollower);
         server.get("/api/v1/user/followed/{target}", followController::findFollowsByFollowed);
+
+        //team endpoints
+        server.get("/api/v1/team/{id}", teamController::findTeamById);
+        server.post("/api/v1/team", teamController::saveTeam);
+        server.put("/api/v1/team", teamController::updateTeam);
+        server.delete("/api/v1/team/{id}", teamController::deleteTeam);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);

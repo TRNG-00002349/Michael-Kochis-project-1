@@ -16,7 +16,7 @@ import java.util.List;
  * This will handle all the HTTP level request.
  */
 public class UserController {
-    UserService us;
+    private static UserService us;
 
     public UserController() {
         this.us = new UserService();
