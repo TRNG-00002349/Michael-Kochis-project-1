@@ -24,7 +24,10 @@ public class FollowController {
         Follow follow = context.bodyAsClass(Follow.class);
         Follow returnThis = fs.createFollow(follow.getFollowerId(), follow.getFollowedId());
 
-        if (returnThis == null) {
+        if (follow.getFollowerId() == follow.getFollowedId()) {
+            context.status(HttpStatus.BAD_REQUEST)
+                    .result("You cannot follow yourseelf.");
+        } else if (returnThis == null) {
             context.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .result("Something went wrong.");
         } else {

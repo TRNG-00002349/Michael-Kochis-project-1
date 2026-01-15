@@ -1,9 +1,6 @@
 package com.revature.utils;
 
-import com.revature.controlers.FollowController;
-import com.revature.controlers.HealthController;
-import com.revature.controlers.TeamController;
-import com.revature.controlers.UserController;
+import com.revature.controlers.*;
 import io.javalin.Javalin;
 
 /*
@@ -19,6 +16,7 @@ public class JavelinUtil {
         FollowController followController = new FollowController();
         HealthController healthController = new HealthController();
         TeamController teamController = new TeamController();
+        TeamMaskController teamMaskController = new TeamMaskController();
         UserController userController = new UserController();
 
 
@@ -42,6 +40,13 @@ public class JavelinUtil {
         server.post("/api/v1/team", teamController::saveTeam);
         server.put("/api/v1/team", teamController::updateTeam);
         server.delete("/api/v1/team/{id}", teamController::deleteTeam);
+
+        //team-mask endpoints
+        server.get("api/v1/teammask/team/{team_id}", teamMaskController::findTeamMaskByTeam);
+        server.get("api/v1/teammask/mask/{mask_id}", teamMaskController::findTeamsByMask);
+        server.post("/api/v1/teammask", teamMaskController::saveTeamMask);
+        server.put("/api/v1/teammask", teamMaskController::updateTeamMask);
+        server.delete("/api/v1/teammask", teamMaskController::deleteTeamMask);
 
         //user enpoints
         server.post("/api/v1/login", userController::userLogon);
